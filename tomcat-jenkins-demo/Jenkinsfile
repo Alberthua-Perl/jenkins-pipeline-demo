@@ -2,6 +2,7 @@ node {
   // Pull code from GitLab
   stage('Git Checkout') { 
 	checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '3ed0fde6-cc83-4134-92d8-b31226cb79f3', url: 'git@192.168.0.110:devuser/tomcat-jenkins-demo.git']]])
+  // This director could be use pipeline syntax to generate.
   }
   // Build container image and push to Harbor registry
   stage('Build and Push Image') {
