@@ -1,0 +1,23 @@
+node { 
+  // Pull code from GitLab
+  stage('Git Checkout') { 
+	checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '3ed0fde6-cc83-4134-92d8-b31226cb79f3', url: 'git@192.168.0.110:devuser/tomcat-jenkins-demo.git']]])
+  }
+  // Build container image and push to Harbor registry
+  stage('Build and Push Image') {
+	sh '''	
+	REPOSITORY=harbor.domain12.example.com:8880/library/tomcat-jenkins-demo:v1.0.0
+	sudo podman login -u admin -p redhat harbor.domain12.example.com:8880
+	sudo podman build -t ${REPOSITORY} .
+	sudo podman push ${REPOSITORY}
+	'''
+  }
+  // Deploy container to podman host
+  stage('Deploy to Podman') {
+	sh '''
+	REPOSITORY=harbor.domain12.example.com:8880/library/tomcat-jenkins-demo:v1.0.0
+	sudo podman pull ${REPOSITORY}
+	sudo podman run -d --name tomcat-java-demo -p 88:8808 ${REPOSITORY}
+	'''
+   }
+}
