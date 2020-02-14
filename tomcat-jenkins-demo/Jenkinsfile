@@ -18,7 +18,7 @@ node {
 	sh '''
 	REPOSITORY=harbor.domain12.example.com:8880/library/tomcat-jenkins-demo:v1.0.0
 	sudo docker pull ${REPOSITORY}
-	sudo docker run -d --name tomcat-java-demo -p 88:8808 ${REPOSITORY}
+	sudo docker run -d --name tomcat-java-demo -p 88:8080 ${REPOSITORY}
 	'''
    }
 }
