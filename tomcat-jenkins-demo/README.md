@@ -1,3 +1,3 @@
-# **tomcat-jenkins-demo** #
+# **Tomcat Jenkins Demo** #
 
-Repository for tomcat-jenkins-pipeline demo.
+- Repository for tomcat-jenkins-pipeline demo.

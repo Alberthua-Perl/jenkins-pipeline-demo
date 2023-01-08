@@ -1,0 +1,15 @@
+apiVersion: "build.openshift.io/v1"
+kind: "BuildConfig"
+metadata:
+  name: "simple-pipeline" 
+spec:
+  source:
+    contextDir: simple-pipeline 
+    # directory stored application source code
+    git:
+      uri: "https://github.com/Alberthua-Perl/DO288-apps" 
+      ref: "simple-pipeline"
+      # branch of source code repository
+  strategy:
+    jenkinsPipelineStrategy: {}
+    type: JenkinsPipeline
